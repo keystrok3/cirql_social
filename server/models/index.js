@@ -1,10 +1,14 @@
 
-const { sequelize_instance } = require("../dbconfig/db");
+const Follows = require("./follows");
+const Post = require("./posts");
 const User = require("./users");
 
 
-const models = [ User ];
+const models = [ User, Post, Follows ];
 
+/**
+ * Sync models
+*/
 const database_sync = async () => {
     for (let model of models) {
         try {

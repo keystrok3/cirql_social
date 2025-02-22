@@ -5,9 +5,22 @@
 
 const { Model, DataTypes } = require("sequelize");
 const { sequelize_instance } = require("../dbconfig/db");
+const Follows = require("./follows");
 
 
-class User extends Model {}
+class User extends Model {
+    static associate(model) {
+        User.belongsTo(model.User, {
+            foreignKey: 'user',
+            through: Follows
+        });
+
+        User.belongsTo(model.User, {
+            foreignKey: 'user_followed',
+            through: Follows
+        });
+    }
+}
 
 User.init({
     username: {
